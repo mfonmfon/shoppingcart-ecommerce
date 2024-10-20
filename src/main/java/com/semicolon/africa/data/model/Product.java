@@ -18,6 +18,7 @@ public class Product {
     private String brand;
     private BigDecimal price;
     private int inventory;
+    private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
