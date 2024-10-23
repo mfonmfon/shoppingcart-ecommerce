@@ -1,13 +1,11 @@
-package com.semicolon.africa.service.prouct;
+package com.semicolon.africa.service.product;
 
-import com.semicolon.africa.data.model.Category;
 import com.semicolon.africa.data.model.Product;
 import com.semicolon.africa.dto.request.AddProductRequest;
 import com.semicolon.africa.dto.request.UpdateProductRequest;
 import com.semicolon.africa.dto.response.AddProductResponse;
 import com.semicolon.africa.dto.response.DeleteProductResponse;
 import com.semicolon.africa.dto.response.UpdateProductResponse;
-import lombok.Getter;
 
 import java.util.List;
 

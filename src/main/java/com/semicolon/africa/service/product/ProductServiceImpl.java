@@ -1,4 +1,4 @@
-package com.semicolon.africa.service.prouct;
+package com.semicolon.africa.service.product;
 
 import com.semicolon.africa.data.model.Category;
 import com.semicolon.africa.data.model.Product;
@@ -9,12 +9,10 @@ import com.semicolon.africa.dto.request.UpdateProductRequest;
 import com.semicolon.africa.dto.response.AddProductResponse;
 import com.semicolon.africa.dto.response.DeleteProductResponse;
 import com.semicolon.africa.dto.response.UpdateProductResponse;
-import com.semicolon.africa.exception.CategoryCanNotBeNul;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements  ProductService {
@@ -26,15 +24,12 @@ public class ProductServiceImpl implements  ProductService {
 
     @Override
     public AddProductResponse addProduct(AddProductRequest productRequest) {
-
-        Category category = categoryRepository.findCategoryByName(productRequest.getCategory().getName());
+        Category category = categoryRepository.findCategoryById(productRequest.getCategory().getId());
         if (category == null){
             Category newCategory = new Category();
             newCategory.setName(productRequest.getCategory().getName());
             categoryRepository.save(newCategory);
-
         }
-
         Product product = new Product();
         product.setName(productRequest.getName());
         product.setBrand(productRequest.getBrand());
@@ -42,12 +37,10 @@ public class ProductServiceImpl implements  ProductService {
         product.setInventory(productRequest.getInventory());
         product.setDescription(productRequest.getDescription());
         product.setCategory(productRequest.getCategory());
-        category.getProducts().add(product);
         productRepository.save(product);
         AddProductResponse addProductResponse = getAddProductResponse(product);
         return addProductResponse;
     }
-
     private static AddProductResponse getAddProductResponse(Product product) {
         AddProductResponse addProductResponse = new AddProductResponse();
         addProductResponse.setProductId(product.getId());
@@ -63,6 +56,7 @@ public class ProductServiceImpl implements  ProductService {
 
     @Override
     public UpdateProductResponse updateProduct(UpdateProductRequest updateProductRequest) {
+
         return null;
     }
 
