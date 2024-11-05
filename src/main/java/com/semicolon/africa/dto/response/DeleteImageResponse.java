@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RetrieveCategoryResponse {
-    private Long categoryId;
+public class DeleteImageResponse {
     private String message;
 }

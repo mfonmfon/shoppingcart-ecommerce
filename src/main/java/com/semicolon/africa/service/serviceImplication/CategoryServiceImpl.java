@@ -32,14 +32,23 @@ public class CategoryServiceImpl implements CategoryService {
         addCategoryResponse.setMessage(STR."Added \{addCategoryRequest.getName()} to category ");
         return addCategoryResponse;
     }
+
     @Override
     public RetrieveCategoryResponse retrieveCategory(RetrieveCategoryRequest retrieveCategoryRequest) {
-        Category category = categoryRepository.findCategoryById(retrieveCategoryRequest.getCategoryId());
-
+//        validateCategory(retrieveCategoryRequest.getName());
+        Category category = findCategoryById(retrieveCategoryRequest.getCategoryId());
+        category.setId(retrieveCategoryRequest.getCategoryId());
         category.setName(retrieveCategoryRequest.getName());
         RetrieveCategoryResponse retrieveCategoryResponse = new RetrieveCategoryResponse();
+        retrieveCategoryResponse.setCategoryId(category.getId());
         retrieveCategoryResponse .setMessage("Updated category ");
-        return retrieveCategoryResponse ;
+        return retrieveCategoryResponse;
+    }
+
+    private void validateCategory(String name) {
+        boolean isCategoryExist = categoryRepository.existsByName(name);
+        if(!isCategoryExist)throw new CategoryNotFoundException("Category not found  ");
+
     }
 
     @Override
