@@ -5,6 +5,7 @@ import com.semicolon.africa.data.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductByName(String name);
@@ -15,10 +16,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> getProductByCategoryNameAndBrand(String categoryName, String brand);
 
-    List<Product> getProductByBrandAndName(String brand, String name);
 
     Long countByBrandAndName(String brand, String name);
 
+   Optional<Product> findProductById(Long id);
 
+    List<Product> findByBrand(String brand);
+
+
+    List<Product> findProductByBrandAndName(String brand, String name);
 }
 

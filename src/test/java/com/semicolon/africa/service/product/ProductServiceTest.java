@@ -7,6 +7,7 @@ import com.semicolon.africa.dto.request.AddProductRequest;
 import com.semicolon.africa.dto.request.UpdateProductRequest;
 import com.semicolon.africa.dto.response.AddProductResponse;
 import com.semicolon.africa.dto.response.UpdateProductResponse;
+import com.semicolon.africa.service.interfaces.Product.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class ProductServiceTest {
     @Autowired
-    private  ProductService productService;
+    private ProductService productService;
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -53,7 +54,7 @@ public class ProductServiceTest {
         productRequest.setInventory(20);
         productRequest.setPrice(BigDecimal.valueOf(700000));
         productRequest.setDescription("Brand new iphone 12");
-        productRequest.setCategory(new Category());
+
         AddProductResponse productResponse = productService.addProduct(productRequest);
         assertEquals("Product added", productResponse.getMessage());
         UpdateProductRequest updateProductRequest = new UpdateProductRequest();
